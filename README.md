@@ -1,24 +1,36 @@
-# README
+# Relabs API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+O Relabs API é uma api simples para os desafios de Flutter da Relabs.
 
-Things you may want to cover:
+## Setup
 
-* Ruby version
+#### 1. Configurar o .env
+Observe que na pasta raiz do nosso projeto existe um arquivo `.env.example` e que nele já existe algumas chaves que estão apenas aguardando valores.
 
-* System dependencies
+Essas chaves já estão sendo utilizadas em alguns pontos da nossa aplicação, tudo o que precisamos fazer é criar uma cópia desse `.env.example`, e renomeá-la para `.env`.
 
-* Configuration
+#### 2. Popular os dados
 
-* Database creation
+```bash
+$ docker compose run app bash -c "bundle exec rails db:reset"
+```
 
-* Database initialization
+#### 3. Rodar a aplicação
 
-* How to run the test suite
+```bash
+$ docker compose up app
+```
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
+## Endpoints
+#### Endpoints de autenticação:
 
-* ...
+* POST /auth/sign_in
+  * Autentica um usuário e retorna um token de acesso.
+  * Payload:
+  ```json
+  {
+    "email": "user@rebase.com",
+    "password": "password"
+  }
+  ```
