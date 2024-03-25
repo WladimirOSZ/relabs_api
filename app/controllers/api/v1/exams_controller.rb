@@ -3,7 +3,7 @@ class Api::V1::ExamsController < ActionController::API
   before_action :authenticate_user!
 
   def index
-    render json: Exam.all, include: ['lab', 'doctor', 'patient']
+    render json: current_user.exams.all, include: ['lab', 'doctor', 'patient']
   end
 
   def show

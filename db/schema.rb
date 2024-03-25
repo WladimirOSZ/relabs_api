@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_24_193923) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_25_145554) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -55,10 +55,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_24_193923) do
     t.string "name"
     t.string "cpf"
     t.string "email"
-    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_patients_on_user_id"
   end
 
   create_table "test_types", force: :cascade do |t|
@@ -87,8 +85,10 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_24_193923) do
     t.json "tokens"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "patient_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["patient_id"], name: "index_users_on_patient_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
@@ -99,5 +99,4 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_24_193923) do
   add_foreign_key "exams", "doctors"
   add_foreign_key "exams", "labs"
   add_foreign_key "exams", "patients"
-  add_foreign_key "patients", "users"
 end

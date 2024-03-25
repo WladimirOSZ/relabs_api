@@ -7,5 +7,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :validatable
   include DeviseTokenAuth::Concerns::User
 
+  belongs_to :patient
+  has_many :exams, through: :patient
   
 end

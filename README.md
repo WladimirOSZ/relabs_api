@@ -26,7 +26,7 @@ $ docker compose up app
 #### Endpoints de autenticação:
 
 * POST /auth/sign_in
-  * Autentica um usuário e retorna um token de acesso.
+  * Autentica o usuário do paciente e retorna dados de acesso nos headers. São necessários o access-token, client e uid para acessar os endpoints protegidos. 
   * Payload:
   ```json
   {
@@ -34,3 +34,26 @@ $ docker compose up app
     "password": "password"
   }
   ```
+
+* GET /api/v1/exams
+  * Retorna todos os exames do paciente atual.
+  * Headers necessários:
+  ```json
+  {
+    "access-token": "token",
+    "client": "client",
+    "uid": "uid",
+  }
+  ```
+
+* GET /api/v1/exams/:id
+  * Retorna um exame específico com resultados
+  * Headers:
+  ```json
+  {
+    "access-token": "token",
+    "client": "client",
+    "uid": "uid",
+  }
+  ```
+
